@@ -1,0 +1,22 @@
+import argparse
+import os
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-d", "--Delete", nargs='?', const=1, type=int,help = "Show Output")
+parser.add_argument("-C", "--Create", nargs='?', const=1, type=int, help = "Show Output")
+parser.add_argument("-c", "--Count", help = "Show Output")
+parser.add_argument("-u", "--Username", help = "Show Output")
+
+args = parser.parse_args()
+
+if args.Create:
+        if args.Username and args.Count:
+                for i in range(int(args.Count)):
+                        os.system(f"useradd {args.Username}{i} -m -d /home/{args.Username}{i} -p {args.Username}{i}")
+elif args.Delete:
+        if args.Username and args.Count:
+                for i in range(int(args.Count)):
+                        os.system(f"userdel {args.Username}{i}")
+else:
+        print("Lütfen -C veya -d parametrelerini giriniz")
